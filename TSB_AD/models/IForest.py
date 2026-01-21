@@ -180,8 +180,10 @@ class IForest(BaseDetector):
         """
         n_samples, n_features = X.shape
 
-        # Converting time series data into matrix format
-        X = Window(window = self.slidingWindow).convert(X)        
+        # Converting time series data into matrix format - each row is a sliding window, with features in the windowconcatenated into a single row
+        X = Window(window = self.slidingWindow).convert(X)
+
+        # This normalizes each row of X separately - weird thing to do with multivariate data       
         if self.normalize: 
             if n_features == 1:
                 X = zscore(X, axis=0, ddof=0)

@@ -310,9 +310,9 @@ def run_OmniAnomaly(data_train, data_test, win_size=100, lr=0.002):
     score = clf.decision_function(data_test)
     return score.ravel()
 
-def run_USAD(data_train, data_test, win_size=5, lr=1e-4):
+def run_USAD(data_train, data_test, win_size=5, lr=1e-4, validation_size=0.2):
     from .models.USAD import USAD
-    clf = USAD(win_size=win_size, feats=data_test.shape[1], lr=lr)
+    clf = USAD(win_size=win_size, feats=data_test.shape[1], lr=lr, validation_size=validation_size)
     clf.fit(data_train)
     score = clf.decision_function(data_test)
     return score.ravel()
